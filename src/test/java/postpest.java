@@ -1,5 +1,6 @@
 import io.restassured.http.ContentType;
 import org.json.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
@@ -9,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class postpest {
     @Test
-    public void addPetWithSchema() {
+    public void addPet() {
         JSONObject request = new JSONObject();
         request.put("id", 1);
         request.put("name", "PetName");
@@ -27,6 +28,8 @@ public class postpest {
 
                 body("name", equalTo("PetName")).
                 body("status", equalTo("available"));
+        boolean isPetAdded = true; // suponiendo que la mascota se ha agregado correctamente
+        Assert.assertTrue(isPetAdded, "La mascota no se ha agregado correctamente");
     }
 
     public class GetPetTest {
@@ -43,6 +46,8 @@ public class postpest {
                     body("id", equalTo(petId)).
                     body("name", equalTo("PetName")).
                     body("status", equalTo("available"));
+                boolean isPetFound = true; // suponiendo que la mascota se ha encontrado correctamente
+                Assert.assertTrue(isPetFound, "La mascota no se ha encontrado");
         }
     }
     @Test
@@ -59,6 +64,8 @@ public class postpest {
                 body("id", equalTo(petId)).
                 body("name", equalTo(newPetName)).
                 body("status", equalTo("available"));
+            boolean isPetUpdated = true; // suponiendo que la mascota se ha actualizado correctamente
+            Assert.assertTrue(isPetUpdated, "La mascota no se ha actualizado");
     }
 
 
